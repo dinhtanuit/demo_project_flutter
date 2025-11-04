@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:demo_flutter/demo_profile_card.dart';
+import 'package:demo_flutter/demo_weather.dart';
 
 void main() {
   runApp(const MyApp());
@@ -85,108 +87,71 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(child: ProfileCard()),
 
-      // Center is a layout widget. It takes a single child and positions it
-      // in the middle of the parent.
-      // child: Column(
-      //   // Column is also a layout widget. It takes a list of children and
-      //   // arranges them vertically. By default, it sizes itself to fit its
-      //   // children horizontally, and tries to be as tall as its parent.
-      //   //
-      //   // Column has various properties to control how it sizes itself and
-      //   // how it positions its children. Here we use mainAxisAlignment to
-      //   // center the children vertically; the main axis here is the vertical
-      //   // axis because Columns are vertical (the cross axis would be
-      //   // horizontal).
-      //   //
-      //   // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-      //   // action in the IDE, or press "p" in the console), to see the
-      //   // wireframe for each widget.
-      //   mainAxisAlignment: MainAxisAlignment.center,
-      //   children: <Widget>[
-      //     const Text('You have pushed the button this many times:'),
-      //     Text(
-      //       '$_counter',
-      //       style: Theme.of(context).textTheme.headlineMedium,
-      //     ),
-      //   ],
-      // ),
-      // ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      body: const ButtonList(),
     );
   }
 }
 
-class ProfileCard extends StatelessWidget {
-  const ProfileCard({super.key});
+class ButtonList extends StatelessWidget {
+  const ButtonList({super.key});
+
+  final List<String> names = const [
+      'Demo Profile Card',
+      'Trần Thị B',
+      'Lê Văn C',
+      'Phạm Thị D',
+      'Hoàng Văn E',
+      'Đỗ Thị F',
+      'Vũ Văn G',
+      'Bùi Thị H',
+      'Phan Văn I',
+      'Đặng Thị K',
+    ];
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 300,
-      height: 400,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.06),
-            spreadRadius: 5,
-            blurRadius: 12,
-            offset: Offset(0, 6),
+    // Tạo danh sách 10 button bằng List.generate
+    final buttons = List.generate(names.length, (index) {
+      final name = names[index];
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 16.0),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            minimumSize: const Size.fromHeight(48), // cao đều
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
           ),
-        ],
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: 72,
-                height: 72,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: NetworkImage('https://i.pravatar.cc/300'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
+          onPressed: () {
+            switch (index) {
+              case 0:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DemoProfileCard(name: name)),
+                );
+                break;
+                case 1:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => WeatherListScreen()),
+                );
+                break;
 
-              SizedBox(width: 16),
+                default:
+                break;
+            }
+            // Hành động khi nhấn
+            debugPrint('Button $name pressed');
+          },
+          child: Text('$name'),
+        ),
+      );
+    });
 
-              Expanded( // <-- thêm Expanded ở đây
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'John Doe dsfsdfds fdsf sfsdf sd fsdfsdfsfds ',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    SizedBox(height: 4),
-                    Text(
-                      'Software Engineer',
-                      style: TextStyle(fontSize: 16, color: Colors.grey),
-                    ),
-                  ],
-                ),
-              ),
-              
-            ],
-          ),
-        ],
-      ),
+    return ListView(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      children: buttons,
     );
   }
 }
