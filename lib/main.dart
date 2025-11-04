@@ -98,7 +98,7 @@ class ButtonList extends StatelessWidget {
 
   final List<String> names = const [
       'Demo Profile Card',
-      'Trần Thị B',
+      'Demo Weather',
       'Lê Văn C',
       'Phạm Thị D',
       'Hoàng Văn E',
