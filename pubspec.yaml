@@ -12,6 +12,11 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.8
   http: ^1.5.0
+  flutter_svg: ^2.0.7
+  google_fonts: ^5.0.0
+  get: ^4.6.5        # State management
+  dartz: ^0.10.1     # Either/Functional
+  equatable: ^2.0.5  # Value equality
 
 dev_dependencies:
   flutter_test:
@@ -22,3 +27,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/icons/
+    - assets/images/

@@ -1,0 +1,9 @@
+name: clean_architecture
+description: Generate Clean Architecture module (Presentation / Domain / Data) with GetX
+version: 0.1.0
+
+vars:
+  name:
+    type: string
+    description: Module name (snake_case)
+    prompt: What is the module name?
